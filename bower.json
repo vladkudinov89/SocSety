@@ -1,0 +1,23 @@
+{
+  "name": "SocSet-project",
+  "authors": [
+    "Vlad Kudinov <vlad.kudinov.89@gmail.com>"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.3",
+    "bootstrap": "^3.3.6",
+    "jquery.sticky": "1.0.0",
+    "modernizr": "3.5.0",
+    "smooth-scroll": "1.0.1",
+    "scrollspy" : "0.1.3",
+    "fontawesome": "4.7.0" 
+
+  }
+}
