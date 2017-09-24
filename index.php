@@ -2,15 +2,9 @@
 
 require_once 'header.php';
 
-
-?>
-
-
-<?php
-
-if ($loggedin) {
-    echo "$user, you are logged in.";
-}//if
+if ($loggedin) { ?>
+    <a href="members.php?view=$user">members.php?view=$user</a>
+<?php }//if
 
 else { ?>
     <div class="container">
@@ -34,9 +28,15 @@ else { ?>
                     } else {
                         $_SESSION['user'] = $user;
                         $_SESSION['pass'] = $pass;
+
                         /*die("You are now logged in. Please <a href='members.php?view=$user'>" .
                             "click here</a> to continue.<br><br>");*/
-                        header('Location: /SocSety/members.php?view=$user');
+
+                        /*In Home*/
+                        /*header('Location: /SocSety/members.php?view=$user');*/
+
+                        /*In work*/
+                        header('Location: /SocialDiplom/profile.php');
                     }//else
                 }//else
             }

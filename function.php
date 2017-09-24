@@ -3,7 +3,7 @@ $dbhost  = 'localhost';    // Unlikely to require changing
 $dbname  = 'robinsnest';   // Modify these...
 $dbuser  = 'robinsnest';   // ...variables according
 $dbpass  = 'asutpdp3';   // ...to your installation
-$appname = "Robin's Nest"; // ...and preference
+$appname = "SocSet"; // ...and preference
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error) die($connection->connect_error);
@@ -24,12 +24,14 @@ function queryMysql($query)
 
 function destroySession()
 {
+
     $_SESSION=array();
 
     if (session_id() != "" || isset($_COOKIE[session_name()]))
         setcookie(session_name(), '', time()-2592000, '/');
 
     session_destroy();
+
 }
 
 function sanitizeString($var)
