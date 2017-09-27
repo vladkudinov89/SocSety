@@ -1,10 +1,11 @@
-<?php // Example 26-8: profile.php
+<?php
+
 require_once 'header.php';
 
-if (!$loggedin) die();
-?>
-<div class="wrapper">
 
+?>
+
+<div class="wrapper">
 
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
@@ -40,7 +41,7 @@ if (!$loggedin) die();
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a></li>
+                <li class="active"><a href="profile.php"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a></li>
                 <li><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>
                 <!--<li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>-->
                 <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
@@ -66,8 +67,8 @@ if (!$loggedin) die();
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Page Header
-                <small>Optional description</small>
+                <h3>Ваш Профиль</h3>
+                <small>Профиль пользователя</small>
             </h1>
         </section>
 
@@ -77,88 +78,20 @@ if (!$loggedin) die();
             <!--------------------------
               | Your Page Content Here |
       -------------------------->
-            <?php
-            echo "<h3>Your Profile</h3>";
-
-            $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
-
-            if (isset($_POST['text'])) {
-                $text = sanitizeString($_POST['text']);
-                $text = preg_replace('/\s\s+/', ' ', $text);
-
-                if ($result->num_rows)
-                    queryMysql("UPDATE profiles SET text='$text' where user='$user'");
-                else queryMysql("INSERT INTO profiles VALUES('$user', '$text')");
-            } else {
-                if ($result->num_rows) {
-                    $row = $result->fetch_array(MYSQLI_ASSOC);
-                    $text = stripslashes($row['text']);
-                } else $text = "";
-            }
-
-            $text = stripslashes(preg_replace('/\s\s+/', ' ', $text));
-
-            if (isset($_FILES['image']['name'])) {
-                $saveto = "$user.jpg";
-                move_uploaded_file($_FILES['image']['tmp_name'], $saveto);
-                $typeok = TRUE;
-
-                switch ($_FILES['image']['type']) {
-                    case "image/gif":
-                        $src = imagecreatefromgif($saveto);
-                        break;
-                    case "image/jpeg":  // Both regular and progressive jpegs
-                    case "image/pjpeg":
-                        $src = imagecreatefromjpeg($saveto);
-                        break;
-                    case "image/png":
-                        $src = imagecreatefrompng($saveto);
-                        break;
-                    default:
-                        $typeok = FALSE;
-                        break;
-                }
-
-                if ($typeok) {
-                    list($w, $h) = getimagesize($saveto);
-
-                    $max = 100;
-                    $tw = $w;
-                    $th = $h;
-
-                    if ($w > $h && $max < $w) {
-                        $th = $max / $w * $h;
-                        $tw = $max;
-                    } elseif ($h > $w && $max < $h) {
-                        $tw = $max / $h * $w;
-                        $th = $max;
-                    } elseif ($max < $w) {
-                        $tw = $th = $max;
-                    }
-
-                    $tmp = imagecreatetruecolor($tw, $th);
-                    imagecopyresampled($tmp, $src, 0, 0, 0, 0, $tw, $th, $w, $h);
-                    imageconvolution($tmp, array(array(-1, -1, -1),
-                        array(-1, 16, -1), array(-1, -1, -1)), 8, 0);
-                    imagejpeg($tmp, $saveto);
-                    imagedestroy($tmp);
-                    imagedestroy($src);
-                }
-            }
-
-            showProfile($user);
-
-           ?>
-    <form method='post' action='profile.php' enctype='multipart/form-data'>
-    <h3>Enter or edit your details and/or upload an image</h3>
-    <textarea name='text' cols='50' rows='3'><?= $text ?></textarea><br>
-
-
-            Image: <input type='file' name='image' size='14'>
-            <div>
-                <input class="btn btn-success" type='submit' value='Save Profile'>
+            <?php require_once 'request_data.php'; ?>
+            <div class="col-md-4">
+                <?php showProfile($user); ?>
+                <h2>Имя: <?= $row1['user_name'] ?></h2>
+                <h2>Фамилия: <?= $row['user_secondName'] ?></h2>
             </div>
-            </form>
+            <div class="col-md-4">
+                <?php
+
+                echo "<a class='button' href='edit_profile.php'>" .
+                    "Редактирование профиля</a><br><br>";
+                ?>
+            </div>
+
 
 
         </section>
@@ -166,5 +99,8 @@ if (!$loggedin) die();
     </div>
     <!-- /.content-wrapper -->
 </div>
+<?php
+require_once 'footer.php';
+die();
 
-<?php require_once 'footer.php'; ?>
+?>

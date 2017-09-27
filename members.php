@@ -9,11 +9,13 @@ if (isset($_GET['view']))
     require_once 'header.php';
 
 
-if ($view == $user) $name = "Your";
+if ($view == $user) $name = "Ваш";
     else                $name = "$view's";
 
 
     ?>
+
+    <div class="wrapper">
 
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
@@ -75,8 +77,8 @@ if ($view == $user) $name = "Your";
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Page Header
-                <small>Optional description</small>
+                <h3><?= $name ?> Профиль</h3>
+                <small>Профиль пользователя</small>
             </h1>
         </section>
 
@@ -86,18 +88,26 @@ if ($view == $user) $name = "Your";
             <!--------------------------
               | Your Page Content Here |
       -------------------------->
-            <?php
-            echo "<h3>$name Profile</h3>";
-            showProfile($view);
-            echo "<a class='button' href='messages.php?view=$view'>" .
-                "View $name messages11</a><br><br>"; ?>
+
+            <div class="col-md-4">
+                <?php showProfile($view); ?>
+                <h2>Имя: <?= $view ?></h2>
+                <h2>Фамилия: <?= $view ?></h2>
+            </div>
+            <div class="col-md-4">
+                <?php
+
+                echo "<a class='button' href='messages.php?view=$view'>" .
+                    "View $name messages11</a><br><br>"; ?>
+            </div>
+
 
 
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+    </div>
     <?php
     require_once 'footer.php';
     die();

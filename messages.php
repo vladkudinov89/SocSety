@@ -147,7 +147,7 @@ if (!$loggedin) die(); ?>
                                         <span class="text-bold">Сообщение:</span> <span> <?= $row['message'] ?> </span>
                                     </div>
 
-                                    <a class="btn btn-success btn-margin" href='messages.php?view=<?= $row['auth'] ?>'>Читать</a>
+                                    <a class="btn btn-primary btn-margin" href='messages.php?view=<?= $row['auth'] ?>'>Читать</a>
                                     <?php if ($row['recip'] !== $row['auth'] || $row['recip'] == $user || $user == $row['auth']) { ?>
                                         <a class="btn btn-danger"
                                            href="messages.php?view=<?php echo $view ?>&erase=<?= $row['id'] ?>">

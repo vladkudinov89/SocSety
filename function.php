@@ -54,6 +54,8 @@ function showProfile($user)
     {
         $row = $result->fetch_array(MYSQLI_ASSOC);
         echo stripslashes($row['text']) . "<br style='clear:left;'><br>";
+        echo stripslashes($row['user_name']) . "<br style='clear:left;'><br>";
+        echo stripslashes($row['user_secondName']) . "<br style='clear:left;'><br>";
     }
 }
 ?>

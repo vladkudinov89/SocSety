@@ -3,10 +3,15 @@ session_start();
 
 require_once 'function.php';
 
+
 $userstr = ' (Guest)';
 
+
+
 if (isset($_SESSION['user'])) {
+
     $user = $_SESSION['user'];
+    require_once 'request_data.php';
     $loggedin = TRUE;
     $userstr = " ($user)";
 } else {
@@ -81,7 +86,8 @@ if ($loggedin) { ?>
                                     <img src="<?= $user ?>.jpg" class="img-circle" alt="User Image">
 
                                     <p>
-                                        Alexander Pierce - Web Developer
+
+                                        <?= $row1['user_name'] ?> <?= $row['user_secondName'] ?> - Web Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
