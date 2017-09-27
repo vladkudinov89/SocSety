@@ -69,7 +69,7 @@ if (sizeof($followers))
 
 if (sizeof($following))
 {
-    echo "<span class='subhead'>$name3 following</span><ul>";
+    echo "<span class='subhead'>$name3 following1</span><ul>";
     foreach($following as $friend)
         echo "<li><a href='members.php?view=$friend'>$friend</a>";
     echo "</ul>";

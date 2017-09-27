@@ -18,7 +18,7 @@ if (!$loggedin) die();
                     <img src="<?= $user ?>.jpg" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
+                    <p><?php echo $user; ?></p>
                     <!-- Status -->
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
@@ -41,18 +41,18 @@ if (!$loggedin) die();
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active"><a href="#"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a></li>
-                <li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>
+                <li><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>
+                <!--<li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>-->
                 <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                <li><a href="friends.php"><i class="fa fa-user-o"></i> <span>Друзья</span></a></li>
                 <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                    <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
                         <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
+                        <li><a href="members.php">Все друзья</a></li>
+                        <li><a href="friends.php">Мои друзья</a></li>
                     </ul>
                 </li>
             </ul>

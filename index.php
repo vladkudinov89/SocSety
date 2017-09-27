@@ -3,7 +3,7 @@
 require_once 'header.php';
 
 if ($loggedin) { ?>
-    <a href="members.php?view=$user">members.php?view=$user</a>
+    <a href="members.php?view=<?= $user ?>">members.php?view=<?= $user ?></a>
 <?php }//if
 
 else { ?>
@@ -33,10 +33,10 @@ else { ?>
                             "click here</a> to continue.<br><br>");*/
 
                         /*In Home*/
-                        /*header('Location: /SocSety/members.php?view=$user');*/
+                        header('Location: /SocSety/profile.php');
 
                         /*In work*/
-                        header('Location: /SocialDiplom/profile.php');
+                        /*header('Location: /SocialDiplom/profile.php');*/
                     }//else
                 }//else
             }
