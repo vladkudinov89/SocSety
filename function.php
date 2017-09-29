@@ -1,4 +1,8 @@
-<?php // Example 26-1: functions.php
+<?php
+
+/*use util\MySQL;
+use model\Entity\DatabaseConnection;*/
+
 $dbhost  = 'localhost';    // Unlikely to require changing
 $dbname  = 'robinsnest';   // Modify these...
 $dbuser  = 'robinsnest';   // ...variables according
@@ -7,6 +11,32 @@ $appname = "SocSet"; // ...and preference
 
 $connection = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 if ($connection->connect_error) die($connection->connect_error);
+/*
+//Создаем объект для подключения к БД
+$connection = new DatabaseConnection(
+    'localhost',
+    'robinsnest',
+    'robinsnest',
+    'asutpdp3',
+    'mysql'
+);
+
+try{
+    //Соединямся с БД
+    MySQL::$db = new \PDO(
+        $connection->GetConnectionString() ,
+        $connection->user,
+        $connection->password,
+        array( \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'' )
+    );
+
+}//try
+catch(\PDOException $ex){
+
+    echo $ex->getMessage();
+    exit();
+
+}//catch*/
 
 function createTable($name, $query)
 {

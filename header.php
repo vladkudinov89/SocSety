@@ -1,4 +1,4 @@
-<?php // Example 26-2: header.php
+<?php
 session_start();
 
 require_once 'function.php';
