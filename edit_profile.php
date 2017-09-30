@@ -82,7 +82,7 @@ if (!$loggedin) die();
             <?php
 
 
-            showProfile($user);
+            /*showProfile($user);*/
             $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
 
             if ($result->num_rows) {
@@ -90,9 +90,17 @@ if (!$loggedin) die();
             }
             ?>
             <form method='post' action='save_profile.php' enctype='multipart/form-data'>
-                <h3>Enter or edit your details and/or upload an image</h3>
-                <div>
-                    Ваше Имя: <input type="text" name="user_name" id="" value="<?php
+                <div class="form-group">
+                    <img src="<?php  echo $row['user_image'] ?>" class="img-bordered" alt="User Image">
+
+                </div>
+                <div class="form-group">
+                    <div class="text-bold">Выбрать изображение:</div>
+                    <input class="btn btn-primary" type='file' name='image' size='14'>
+                </div>
+                <div class="form-group">
+                    <div class="text-bold">Ваше Имя:</div>
+                    <input type="text" name="user_name" id="" value="<?php
                     if (isset($row['user_name'])) {
                         echo $row['user_name'];
                     } else {
@@ -100,30 +108,26 @@ if (!$loggedin) die();
                     }
                     ?> ">
                 </div>
-                <div>
-                    Ваша Фамилия: <input type="text" name="user_secondName" id="" value="<?php
-                                         if (isset($row['user_secondName'])) { echo $row['user_secondName'];
+                <div class="form-group">
+                    <div class="text-bold">Ваша Фамилия:</div>
+                    <input type="text" name="user_secondName" id="" value="<?php
+                    if (isset($row['user_secondName'])) {
+                        echo $row['user_secondName'];
 
-                                         } else {
-                                             echo "";
-                                         }
-                                         ?> ">
+                    } else {
+                        echo "";
+                    }
+                    ?> ">
                 </div>
-                <div>
-                    <textarea name='text' cols='50' rows='3'><?php
-                        if (isset($row['text'])) {
-                            echo $row['text'];
-                        } else {
-                            echo "";
-                        }
-                        ?>
-                    </textarea><br>
+                <div class="form-group">
+                    <div class="text-bold">О себе:</div>
+                    <textarea class="about-me" name='text' cols='50' rows='3'><?php if (isset($row['text'])) echo $row['text']; else { echo "";} ?>
+                    </textarea>
                 </div>
 
 
-                Image: <input type='file' name='image' size='14'>
-                <div>
-                    <input class="btn btn-success" type='submit' value='Save Profile'>
+                <div class="form-group">
+                    <input class="btn btn-success" type='submit' value='Сохранить'>
                 </div>
             </form>
 
@@ -132,6 +136,6 @@ if (!$loggedin) die();
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-</div>
 
-<?php require_once 'footer.php'; ?>
+
+    <?php require_once 'footer.php'; ?>

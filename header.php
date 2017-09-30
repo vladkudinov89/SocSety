@@ -11,7 +11,11 @@ $userstr = ' (Guest)';
 if (isset($_SESSION['user'])) {
 
     $user = $_SESSION['user'];
-    require_once 'request_data.php';
+    $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
+    if ($result->num_rows)
+    {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+    }
     $loggedin = TRUE;
     $userstr = " ($user)";
 } else {
@@ -76,18 +80,18 @@ if ($loggedin) { ?>
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="<?= $user ?>.jpg" class="user-image" alt="User Image">
+                                <img src="<?= $row['user_image'] ?>" class="user-image" alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs"><?= $user ?></span>
+                                <span class="hidden-xs"><?= $row['user_name'] ?></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="<?= $user ?>.jpg" class="img-circle" alt="User Image">
+                                    <img src="<?= $row['user_image'] ?>" class="img-circle" alt="User Image">
 
                                     <p>
 
-                                        <?= $row1['user_name'] ?> <?= $row['user_secondName'] ?> - Web Developer
+                                        <?= $row['user_name'] ?> <?= $row['user_secondName'] ?> - Web Developer
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>

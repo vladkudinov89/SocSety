@@ -1,4 +1,4 @@
-<?php // Example 26-11: messages.php
+<?php
 require_once 'header.php';
 
 if (!$loggedin) die(); ?>
@@ -15,10 +15,10 @@ if (!$loggedin) die(); ?>
                 <!--Sidebar user panel(optional)-->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="<?= $user ?>.jpg" class="img-circle" alt="User Image">
+                        <img src="<?= $row['user_image'] ?>" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p><?php echo $user; ?></p>
+                        <p><?= $row['user_name'] ?></p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                     </div>
@@ -66,8 +66,7 @@ if (!$loggedin) die(); ?>
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Page Header
-                    <small>Optional description</small>
+                    Мои сообщения
                 </h1>
             </section>
 
@@ -100,7 +99,6 @@ if (!$loggedin) die(); ?>
                        /* echo "view: $view<br>";
                         echo "user: $user"; */?>
 
-                        <h3>Мои сообщения</h3>
                        <div>
                            <a class="btn btn-default" href="messages.php?view=<?= $view ?>">Обновить сообщения</a>
                        </div>
@@ -124,7 +122,7 @@ if (!$loggedin) die(); ?>
                                 <div class="">
                                     <div class="user-panel ">
                                         <div class="pull-left image">
-                                            <img src="<?= $row['auth'] ?>.jpg" class="img-circle" alt="User Image">
+                                            <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <div class="pull-left info">
                                             <p class="color"><?= $row['auth'] ?></p>
@@ -212,7 +210,7 @@ if (!$loggedin) die(); ?>
                                     ?>
                                     <div class="user-panel">
                                         <div class="pull-left image">
-                                            <img src="<?= $row['auth'] ?>.jpg" class="img-circle" alt="User Image">
+                                            <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="img-circle" alt="User Image">
                                         </div>
                                         <div class="pull-left info">
                                             <p><?php echo $user; ?></p>
@@ -246,7 +244,7 @@ if (!$loggedin) die(); ?>
 
                 <?php }
 
-                if (!$num) echo "<br><span class='info'>No messages yet</span><br><br>";
+                if (!$num) echo "<br><span class='info'>У вас пока нет сообщений</span><br><br>";
 
 
 

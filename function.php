@@ -73,6 +73,7 @@ function sanitizeString($var)
     return $connection->real_escape_string($var);
 }
 
+
 function showProfile($user)
 {
     if (file_exists("$user.jpg"))

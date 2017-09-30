@@ -26,17 +26,26 @@ body {
     overflow-y: auto;
 }
 
-.message-img-left{
+.message-img-left {
     float: left;
 }
 
-.color{
+.color {
     color: #000 !important;
 }
 
-.btn-margin{
+.btn-margin {
     margin: 10px 20px 10px 0;
 }
+
+.img-width{
+    width: 100%;
+}
+
+.profile-p{
+    font-size: 18px;
+}
+
 
 /* ---------------------------------------------- /*
  * Navigation
@@ -364,6 +373,9 @@ a:focus {
 @media (max-width: 767px) {
     .main-header .navbar-right {
         float: none;
+    }
+    .about-me {
+        width: 100% !important;
     }
 
     .navbar-collapse .main-header .navbar-right {

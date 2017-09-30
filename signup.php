@@ -64,7 +64,7 @@ require_once 'header.php'; ?>
             else {
                 queryMysql("INSERT INTO members VALUES(id, '$user', '$pass') ");
                 /*queryMysql("UPDATE profiles SET user='$user' WHERE user='$user'");*/
-                queryMysql("INSERT INTO profiles VALUES ('$user','','','') ");
+                queryMysql("INSERT INTO profiles VALUES ('$user','','','','dist/img/image_users/no_image.jpg') ");
 
                 die("<h4>Ваш аккаунт создан</h4>Пожалуйста, залогинтесь.<br><br>");
             }

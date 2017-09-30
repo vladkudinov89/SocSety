@@ -11,8 +11,7 @@ require_once 'header.php'; ?>
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Page Header
-                    <small>Optional description</small>
+                   Спасибо за использование нашей сети
                 </h1>
             </section>
 
@@ -24,7 +23,7 @@ require_once 'header.php'; ?>
     -------------------------->
 
                 <div>
-                   You have been logged out. Please <a href='index.php'>click here</a> to refresh the screen.
+                   Для выхода <a href='index.php'> нажмите сюда</a>.
                 </div>
 
             </section>
@@ -52,7 +51,7 @@ require_once 'header.php'; ?>
         -------------------------->
 
                 <div>
-                    You cannot log out because you are not logged in <a href='index.php'>click here</a>
+                    Вы не залогированны. <a href='index.php'>Залогируйтесь</a>,пожалуйста
                 </div>
 
             </section>
