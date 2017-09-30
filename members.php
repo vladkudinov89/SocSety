@@ -1,190 +1,102 @@
-<?php // Example 26-9: members.php
+<?php
 require_once 'header.php';
 
 if (!$loggedin) die();
 
 if (isset($_GET['view'])) {
     $view = sanitizeString($_GET['view']);
-    require_once 'header.php';
 
+    require_once 'header.php';
 
     if ($view == $user) $name = "Ваш";
     else                $name = "$view's";
-
-
     ?>
 
-    <div class="wrapper">
 
-        <!-- Left side column. contains the logo and sidebar -->
-        <aside class="main-sidebar">
-
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-
-                <!-- Sidebar user panel (optional) -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="<?= $row['user_image'] ?>" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p><?= $row['user_name'] ?></p>
-                        <!-- Status -->
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
-                </div>
-
-                <!-- search form (Optional) -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-
-                <!-- Sidebar Menu -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">HEADER</li>
-                    <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="#"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a></li>
-                    <li><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i>
-                            <span>Сообщения</span></a></li>
-                    <!--<li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>-->
-                    <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
-                            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="members.php">Все друзья</a></li>
-                            <li><a href="friends.php">Мои друзья</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- /.sidebar-menu -->
-            </section>
-            <!-- /.sidebar -->
-        </aside>
-
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    <h3><?= $name ?> Профиль</h3>
-                    <small>Профиль пользователя</small>
-                </h1>
-            </section>
-
-            <!-- Main content -->
-            <section class="content container-fluid">
-
-                <!--------------------------
-                  | Your Page Content Here |
-          -------------------------->
-
-                <div class="col-md-4">
-                    <?php showProfile($view); ?>
-                    <h2>Имя: <?= $view ?></h2>
-                    <h2>Фамилия: <?= $view ?></h2>
-                </div>
-                <div class="col-md-4">
-                    <?php
-
-                    echo "<a class='button' href='messages.php?view=$view'>" .
-                        "View $name messages11</a><br><br>"; ?>
-                </div>
-
-
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-    </div>
     <?php
-    require_once 'footer.php';
-    die();
-}
+    $page = "members";
+    require_once 'left-menu.php';
+    $result = queryMysql("SELECT * FROM profiles WHERE user='$view'");
 
-?>
-
-
-
-    <div class="wrapper">
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="<?= $row['user_image'] ?>" class="img-circle" alt="User Image">
-                </div> 
-                <div class="pull-left info">
-                    <p><?= $row['user_name'] ?></p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-
-            <!-- search form (Optional) -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-
-            <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">HEADER</li>
-                <!-- Optionally, you can add icons to the links -->
-                <li><a href="profile.php"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a></li>
-                <!--<li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>-->
-                <li><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i>
-                        <span>Сообщения</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                <li class="treeview active">
-                    <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="active"><a href="members.php">Все друзья</a></li>
-                        <li><a href="friends.php">Мои друзья</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    if ($result->num_rows) {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+    }
+    ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Page Header
-                <small>Optional description</small>
+                <h3><span class="text-bold">Профиль</span>
+                    <span class="text-blue"><?= $row['user_name'] ?> <?= $row['user_secondName'] ?></span>
+                </h3>
             </h1>
         </section>
 
         <!-- Main content -->
         <section class="content container-fluid">
+
+            <!--------------------------
+              | Your Page Content Here |
+      -------------------------->
+            <div class="col-md-3">
+
+                <div class="form-group clearfix">
+                    <img src="<?= $row['user_image'] ?>" class="message-img-left img-width" alt="User Image">
+                </div>
+                <div class="form-group">
+                    <a class="btn-block btn btn-primary"
+                       href="messages.php?view=<?= $view ?>">Сообщения
+                        с <?= $row['user_name'] ?> <?= $row['user_secondName'] ?>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <h3 class="text-bold">Имя:</h3>
+                <p class="profile-p">
+                    <?= $row['user_name'] ?>
+                </p>
+
+                <h3 class="text-bold">Фамилия:</h3>
+                <p class="profile-p">
+                    <?= $row['user_secondName'] ?>
+                </p>
+                <h3 class="text-bold">О себе:</h3>
+                <p class="profile-p">
+                    <?= $row['text'] ?>
+                </p>
+
+            </div>
+
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    </div>
+    <?php
+    require_once 'footer.php';
+} else {
+    ?>
+
+
+    <?php
+    $page = "members";
+    require_once 'left-menu.php' ?>
+    <div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Все друзья
+            </h1>
+        </section>
+
+        <!-- Main content -->
+        <section class="content col-md-6">
             <?php
             if (isset($_GET['add'])) {
 
@@ -194,53 +106,91 @@ if (isset($_GET['view'])) {
 
                 if (!$result->num_rows)
                     queryMysql("INSERT INTO friends VALUES ('$add', '$user')");
-            } elseif (isset($_GET['remove'])) {
+            }//if
+
+            elseif (isset($_GET['remove'])) {
                 $remove = sanitizeString($_GET['remove']);
                 queryMysql("DELETE FROM friends WHERE user='$remove' AND friend='$user'");
-            }
+            }//elseif
 
             $result = queryMysql("SELECT user FROM members ORDER BY user");
             $num = $result->num_rows;
-
             ?>
-            <h3>Все друзья</h3>
-            <ul>
 
+            <ul>
                 <?php for ($j = 0; $j < $num; ++$j) {
                     $row = $result->fetch_array(MYSQLI_ASSOC);
+
                     if ($row['user'] == $user) {
                         continue;
                     }
+                    ?>
+                    <li class="form-group bg-gray-light clearfix">
+                        <?php $filename = "dist/img/image_users/" . $row['user'] . ".jpg";
+                        /*echo $filename;*/
+                        if (file_exists($filename)) { ?>
+                            <img src="dist/img/image_users/<?= $row['user'] ?>.jpg" class="member-img img-circle"
+                                 alt="User Image">
+                        <?php } else { ?>
+                            <img src="dist/img/image_users/no_image.jpg" class="member-img img-circle"
+                                 alt="User Image">
+                        <?php } ?>
 
-                    echo "<li><a href='members.php?view=" . $row['user'] . "'>" . $row['user'] . "</a>";
 
-                    $follow = "follow";
+                        <h3 class="">Логин:
+                            <a href="members.php?view=<?= $row['user'] ?>">
+                                <?= $row['user'] ?>
+                            </a>
+                        </h3>
 
-                    $result1 = queryMysql("SELECT * FROM friends WHERE user='" . $row['user'] . "' AND friend='$user'");
 
-                    $t1 = $result1->num_rows;
-                    $result1 = queryMysql("SELECT * FROM friends WHERE user='$user' AND friend='" . $row['user'] . "'");
-                    $t2 = $result1->num_rows;
+                            <h3 class="members-h3">Статус: </h3>
+                            <div>
+                                <?php $follow = "подписаться";
 
-                    if (($t1 + $t2) > 1) echo " &harr; is a mutual friend";
-                    elseif ($t1) echo " &larr; you are following11";
-                    elseif ($t2) {
-                        echo " &rarr; is following you";
-                        $follow = "recip";
-                    }
+                                $result1 = queryMysql("SELECT * FROM friends WHERE user='" . $row['user'] . "' AND friend='$user'");
+                                $t1 = $result1->num_rows;
 
-                    if (!$t1) echo " [<a href='members.php?add=" . $row['user'] . "'>$follow</a>]";
-                    else      echo " [<a href='members.php?remove=" . $row['user'] . "'>drop</a>]";
-                } ?>
+                                $result1 = queryMysql("SELECT * FROM friends WHERE user='$user' AND friend='" . $row['user'] . "'");
+                                $t2 = $result1->num_rows;
+
+                                if (($t1 + $t2) > 1){ ?>
+                                    <h3 class="members-friend">Ваш друг</h3>
+                                <?php }
+                                elseif ($t1) { ?>
+                                    <h3 class="members-friend">Вы подписаны</h3>
+                                <?php }
+                                elseif ($t2) { ?>
+                                    <h3 class="members-friend">подписан на вас</h3>
+                                    <?php $follow = "добавить в друзья";
+                                }
+
+                                if (!$t1) { ?>
+                                    <div class="members-a">
+                                        <a class="btn btn-success" href="members.php?add=<?= $row['user'] ?>"><?= $follow ?></a>
+                                    </div>
+                                <?php } else { ?>
+                                   <div class="members-a">
+                                       <a class="btn btn-danger" href="members.php?remove=<?= $row['user'] ?> ">удалить из
+                                           друзей</a>
+                                   </div>
+                                <?php } ?>
+                            </div>
+
+                    </li>
+                <?php }//for ?>
                 <!--------------------------
                   | Your Page Content Here |
                   -------------------------->
-                </li>
+
+
             </ul>
         </section>
+        <div class="clearfix"></div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-<?php
+
+<?php }
 
 require_once 'footer.php';

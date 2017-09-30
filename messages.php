@@ -5,61 +5,8 @@ if (!$loggedin) die(); ?>
 
     <div class="wrapper">
 
-
-        <!--Left side column . contains the logo and sidebar-->
-        <aside class="main-sidebar">
-
-            <!--sidebar: style can be found in sidebar . less-->
-            <section class="sidebar">
-
-                <!--Sidebar user panel(optional)-->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="<?= $row['user_image'] ?>" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p><?= $row['user_name'] ?></p>
-                        <!-- Status -->
-                        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                    </div>
-                </div>
-
-                <!-- search form (Optional) -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-
-                <!-- Sidebar Menu -->
-                <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">HEADER</li>
-                    <!-- Optionally, you can add icons to the links -->
-                    <li><a href="profile.php"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a></li>
-                    <li class="active"><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i>
-                            <span>Сообщения</span></a></li>
-                    <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
-                            <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="members.php">Все друзья</a></li>
-                            <li><a href="friends.php">Мои друзья</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <!-- /.sidebar-menu -->
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+        <?php $page = "messages";
+        require_once 'left-menu.php' ?>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -122,7 +69,21 @@ if (!$loggedin) die(); ?>
                                 <div class="">
                                     <div class="user-panel ">
                                         <div class="pull-left image">
-                                            <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="img-circle" alt="User Image">
+                                            <?php
+
+                                            $filename = "dist/img/image_users/" . $row['auth'] . ".jpg";
+                                            /*echo $filename;*/
+
+                                            if (file_exists($filename)) { ?>
+                                                <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="member-img img-circle"
+                                                     alt="User Image">
+                                            <?php } else { ?>
+                                                <img src="dist/img/image_users/no_image.jpg" class="member-img img-circle"
+                                                     alt="User Image">
+
+                                            <?php }
+                                            ?>
+                                           <!-- <img src="dist/img/image_users/<?/*= $row['auth'] */?>.jpg" class="img-circle" alt="User Image">-->
                                         </div>
                                         <div class="pull-left info">
                                             <p class="color"><?= $row['auth'] ?></p>
@@ -166,10 +127,17 @@ if (!$loggedin) die(); ?>
                         echo "view: $view<br>";
                         echo "user: $user";
 
+                        $result = queryMysql("SELECT * FROM profiles WHERE user='$view'");
+
+                        if ($result->num_rows)
+                        {
+                            $row = $result->fetch_array(MYSQLI_ASSOC);
+                        }
+
                         $name1 = "<a href='members.php?view=$view'>$view</a>";
                         $name2 = "$view's"; ?>
 
-                        <h3>Чат с : <?= $name1; ?></h3>
+                        <h3>Чат с <?= $row['user_name'] ?> <?= $row['user_secondName'] ?> </h3>
 
                         <form method='post' action='messages.php?view=<?= $view; ?>'>
                             Оставьте свое сообщение:<br>
@@ -183,7 +151,7 @@ if (!$loggedin) die(); ?>
                             queryMysql("DELETE FROM messages WHERE id=$erase AND recip='$user'");
                         }
 
-                        $query = "SELECT * FROM messages WHERE pm=1 
+                        $query = "SELECT * FROM messages WHERE pm=1
                             AND 
                              ((recip='$user' AND auth='$view') 
                             OR
@@ -194,7 +162,7 @@ if (!$loggedin) die(); ?>
 
                         for ($j = 0; $j < $num; ++$j) {
                             $row = $result->fetch_array(MYSQLI_ASSOC);
-                            /*print_r($row) ;*/
+
                             ?>
                             <div class="form-group bg-gray-light"> <?php
                                 ?>
@@ -202,8 +170,6 @@ if (!$loggedin) die(); ?>
                                     <?php echo $row['auth']; ?>
                                 </div>
                                 <?php
-                                /*echo $row['recip'];
-                                echo $user;*/
 
                                 if ($row['pm'] == 0 || $row['auth'] == $user || $row['recip'] == $user) {
                                     echo date('M jS \'y g:ia:', $row['time']);

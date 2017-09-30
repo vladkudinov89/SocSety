@@ -74,6 +74,7 @@ function sanitizeString($var)
 }
 
 
+
 function showProfile($user)
 {
     if (file_exists("$user.jpg"))

@@ -87,9 +87,8 @@ if ($loggedin) {
     <!-- /.content-wrapper -->
 
 
-
-<?php
-require_once 'footer.php';
+    <?php
+    require_once 'footer.php';
 }//if
 
 else { ?>
@@ -105,8 +104,7 @@ else { ?>
                 if ($user == "" || $pass == "")
                     $error = "<div>Не все поля заполнены</div>";
                 else {
-                    $result = queryMySQL("SELECT user,pass FROM members
-        WHERE user='$user' AND pass='$pass'");
+                    $result = queryMySQL("SELECT user,pass FROM members WHERE user='$user' AND pass='$pass'");
 
                     if ($result->num_rows == 0) {
                         $error = "<div class='bg-danger'>Имя пользователя/Пароль неверны</div>";

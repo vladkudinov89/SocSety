@@ -6,62 +6,10 @@ if (!$loggedin) die();
 <div class="wrapper">
 
 
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="<?= $user ?>.jpg" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?php echo $user; ?></p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-
-            <!-- search form (Optional) -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-
-            <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">HEADER</li>
-                <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="profile.php"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a>
-                </li>
-                <li><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i>
-                        <span>Сообщения</span></a></li>
-                <!--<li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>-->
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="members.php">Все друзья</a></li>
-                        <li><a href="friends.php">Мои друзья</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+    <?php
+    $page = "profile";
+    require_once 'left-menu.php';
+    ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -69,7 +17,6 @@ if (!$loggedin) die();
         <section class="content-header">
             <h1>
                 Редактирование профиля
-                <small>Optional description</small>
             </h1>
         </section>
 
@@ -81,8 +28,6 @@ if (!$loggedin) die();
       -------------------------->
             <?php
 
-
-            /*showProfile($user);*/
             $result = queryMysql("SELECT * FROM profiles WHERE user='$user'");
 
             if ($result->num_rows) {
@@ -100,7 +45,7 @@ if (!$loggedin) die();
                 </div>
                 <div class="form-group">
                     <div class="text-bold">Ваше Имя:</div>
-                    <input type="text" name="user_name" id="" value="<?php
+                    <input type="text" required name="user_name" id="" value="<?php
                     if (isset($row['user_name'])) {
                         echo $row['user_name'];
                     } else {
@@ -110,7 +55,7 @@ if (!$loggedin) die();
                 </div>
                 <div class="form-group">
                     <div class="text-bold">Ваша Фамилия:</div>
-                    <input type="text" name="user_secondName" id="" value="<?php
+                    <input type="text" required name="user_secondName" id="" value="<?php
                     if (isset($row['user_secondName'])) {
                         echo $row['user_secondName'];
 

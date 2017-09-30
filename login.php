@@ -10,8 +10,7 @@ if (isset($_POST['user'])) {
     if ($user == "" || $pass == "")
         $error = "Not all fields were entered<br>";
     else {
-        $result = queryMySQL("SELECT user,pass FROM members
-        WHERE user='$user' AND pass='$pass'");
+        $result = queryMySQL("SELECT user,pass FROM members WHERE user='$user' AND pass='$pass'");
 
         if ($result->num_rows == 0) {
             $error = "<span class='error'>Username/Password
@@ -26,15 +25,14 @@ if (isset($_POST['user'])) {
 }
 ?>
 <form method='post' action='login.php'><?= $error ?>
-    <span class='fieldname'>Логин</span><input type='text'
-                                                  maxlength='16' name='user' value='<?= $user ?>'><br>
-    <span class='fieldname'>Пароль</span><input type='password'
-                                                  maxlength='16' name='pass' value='<?= $pass ?>'>
-
-
-    <br>
+    <div class='fieldname'>Логин</div>
+    <input type='text' maxlength='16' name='user' value='<?= $user ?>'><br>
+    <span class='fieldname'>Пароль</span>
+    <input type='password' maxlength='16' name='pass' value='<?= $pass ?>'>
     <span class='fieldname'>&nbsp;</span>
-    <input type='submit' value='Login'>
+    <div class="form-group">
+        <input type='submit' class="btn btn-primary" value='Login'>
+    </div>
 </form>
 <?php
 

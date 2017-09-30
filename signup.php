@@ -1,6 +1,6 @@
 <?php
 require_once 'header.php'; ?>
-<script>
+<!--<script>
     function checkUser(user) {
         if (user.value == '') {
             O('info').innerHTML = ''
@@ -42,48 +42,75 @@ require_once 'header.php'; ?>
         }
         return request
     }
-</script>
+</script>-->
 
-<div class='main'><h3>Введите логин и пароль для регистрации</h3>
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Введите логин и пароль для регистрации
+            </h1>
+        </section>
 
-    <?php
-    $error = $user = $pass = "";
-    if (isset($_SESSION['user'])) destroySession();
+        <!-- Main content -->
+        <section class="content container-fluid">
 
-    if (isset($_POST['user'])) {
-        $user = sanitizeString($_POST['user']);
-        $pass = sanitizeString($_POST['pass']);
+            <div class="col-md-3 text-center">
+                <?php
+                $error = $user = $pass = "";
+                if (isset($_SESSION['user'])) destroySession();
 
-        if ($user == "" || $pass == "")
-            $error = "Не все поля заполнены<br><br>";
-        else {
-            $result = queryMysql("SELECT * FROM members WHERE user='$user'");
+                if (isset($_POST['user'])) {
+                    $user = sanitizeString($_POST['user']);
+                    $pass = sanitizeString($_POST['pass']);
 
-            if ($result->num_rows)
-                $error = "Этот логин уже занят<br><br>";
-            else {
-                queryMysql("INSERT INTO members VALUES(id, '$user', '$pass') ");
-                /*queryMysql("UPDATE profiles SET user='$user' WHERE user='$user'");*/
-                queryMysql("INSERT INTO profiles VALUES ('$user','','','','dist/img/image_users/no_image.jpg') ");
+                    if ($user == "" || $pass == "")
+                        $error = "<div class='form-group alert-error'>Не все поля заполнены</div>";
+                    else {
+                        $result = queryMysql("SELECT * FROM members WHERE user='$user'");
 
-                die("<h4>Ваш аккаунт создан</h4>Пожалуйста, залогинтесь.<br><br>");
-            }
-        }
-    }
+                        if ($result->num_rows)
+                            $error = "<div class='form-group alert-error'>Этот логин уже занят</div>";
+                        else {
+                            queryMysql("INSERT INTO members VALUES(id, '$user', '$pass') ");
+                            /*queryMysql("UPDATE profiles SET user='$user' WHERE user='$user'");*/
+                            queryMysql("INSERT INTO profiles VALUES ('$user','','','','dist/img/image_users/no_image.jpg') ");
 
-    echo <<<_END
-    <form method='post' action='signup.php'>$error
-    <span class='fieldname'>Логин</span>
-    <input type='text' maxlength='16' name='user' value='$user'
-      onBlur='checkUser(this)'><span id='info'></span><br>
-    <span class='fieldname'>Пароль</span>
-    <input type='password' maxlength='16' name='pass'
-      value='$pass'><br>
-_END;
-    ?>
+                            die("<h4>Ваш аккаунт создан</h4> <a href='index.php'>Пожалуйста, залогиньтесь.</a>");
+                        }
+                    }
+                } ?>
 
-    <span class='fieldname'>&nbsp;</span>
-    <input type='submit' value='Sign up'>
-    </form></div><br>
-</body>
-</html>
+
+                <form method='post' action='signup.php'><?= $error ?>
+                    <div class='form-group text-bold'>Логин</div>
+                    <div class="form-group">
+                        <input type='text' maxlength='16' name='user' value='<?= $user ?>'
+                               onBlur='checkUser(this)'>
+                    </div>
+                    <div id='info'>
+
+                    </div>
+                    <div class='form-group text-bold'>Пароль</div>
+                    <div class="form-group">
+                        <input type='password' maxlength='16' name='pass' value='<?= $pass ?>'>
+                    </div>
+                    <div class="form-group">
+                        <input type='submit' class="btn btn-primary" value='Зарегистрироваться'>
+                    </div>
+                </form>
+            </div>
+
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+</div>
+
+<?php
+require_once 'footer.php';
+?>
+

@@ -11,62 +11,9 @@ if ($result->num_rows)
 
     <div class="wrapper">
 
-    <!-- Left side column. contains the logo and sidebar -->
-    <aside class="main-sidebar">
-
-        <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
-
-            <!-- Sidebar user panel (optional) -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="<?= $row['user_image'] ?>" class="img-circle" alt="User Image">
-                </div>
-                <div class="pull-left info">
-                    <p><?= $row['user_name'] ?></p>
-                    <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                </div>
-            </div>
-
-            <!-- search form (Optional) -->
-            <form action="#" method="get" class="sidebar-form">
-                <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-              </button>
-            </span>
-                </div>
-            </form>
-            <!-- /.search form -->
-
-            <!-- Sidebar Menu -->
-            <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">HEADER</li>
-                <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="profile.php"><i class="fa  fa-address-card-o"></i> <span>Профиль</span></a>
-                </li>
-                <li><a href="messages.php?view=<?php echo $user; ?>"><i class="fa fa-envelope"></i>
-                        <span>Сообщения</span></a></li>
-                <!--<li><a href="members.php?view=$user"><i class="fa fa-envelope"></i> <span>Сообщения</span></a></li>-->
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="members.php">Все друзья</a></li>
-                        <li><a href="friends.php">Мои друзья</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <!-- /.sidebar-menu -->
-        </section>
-        <!-- /.sidebar -->
-    </aside>
+<?php
+$page = "profile";
+require_once 'left-menu.php' ?>
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -91,9 +38,6 @@ if ($result->num_rows)
                 if ($result->num_rows)
                 {
                     $row = $result->fetch_array(MYSQLI_ASSOC);
-                    /*echo stripslashes($row['text']) . "<br style='clear:left;'><br>";
-                    echo stripslashes($row['user_name']) . "<br style='clear:left;'><br>";
-                    echo stripslashes($row['user_secondName']) . "<br style='clear:left;'><br>";*/
                 }
                 ?>
 
@@ -143,8 +87,7 @@ if ($result->num_rows)
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
 <?php
 require_once 'footer.php';
-die();
-
 ?>
