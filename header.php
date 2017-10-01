@@ -34,11 +34,9 @@ if (isset($_SESSION['user'])) {
         <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css">
-        <!-- Theme style -->
+
         <link rel="stylesheet" href="dist/css/AdminLTE.css">
-        <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
-              page. However, you can choose any other skin. Make sure you
-              apply the skin class to the body tag so the changes take effect. -->
+
         <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -91,21 +89,21 @@ if ($loggedin) { ?>
 
                                     <p>
 
-                                        <?= $row['user_name'] ?> <?= $row['user_secondName'] ?> - Web Developer
-                                        <small>Member since Nov. 2012</small>
+                                        <?= $row['user_name'] ?> <?= $row['user_secondName'] ?>
+
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
                                 <li class="user-body">
                                     <div class="row">
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
+                                            <a href="messages.php">Сообщения</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
                                             <a href="#">Sales</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
+                                            <a href="friends.php">Друзья</a>
                                         </div>
                                     </div>
                                     <!-- /.row -->

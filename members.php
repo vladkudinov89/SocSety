@@ -79,10 +79,7 @@ if (isset($_GET['view'])) {
     <?php
     require_once 'footer.php';
 } else {
-    ?>
 
-
-    <?php
     $page = "members";
     require_once 'left-menu.php' ?>
     <div class="wrapper">
@@ -146,7 +143,8 @@ if (isset($_GET['view'])) {
 
                             <h3 class="members-h3">Статус: </h3>
                             <div>
-                                <?php $follow = "подписаться";
+                                <?php
+                                $follow = "подписаться";
 
                                 $result1 = queryMysql("SELECT * FROM friends WHERE user='" . $row['user'] . "' AND friend='$user'");
                                 $t1 = $result1->num_rows;

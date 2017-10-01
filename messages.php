@@ -75,10 +75,10 @@ if (!$loggedin) die(); ?>
                                             /*echo $filename;*/
 
                                             if (file_exists($filename)) { ?>
-                                                <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="member-img img-circle"
+                                                <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="img-circle"
                                                      alt="User Image">
                                             <?php } else { ?>
-                                                <img src="dist/img/image_users/no_image.jpg" class="member-img img-circle"
+                                                <img src="dist/img/image_users/no_image.jpg" class="img-circle"
                                                      alt="User Image">
 
                                             <?php }
@@ -176,10 +176,24 @@ if (!$loggedin) die(); ?>
                                     ?>
                                     <div class="user-panel">
                                         <div class="pull-left image">
-                                            <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="img-circle" alt="User Image">
+                                            <?php
+
+                                            $filename = "dist/img/image_users/" . $row['auth'] . ".jpg";
+                                            /*echo $filename;*/
+
+                                            if (file_exists($filename)) { ?>
+                                                <img src="dist/img/image_users/<?= $row['auth'] ?>.jpg" class="img-circle"
+                                                     alt="User Image">
+                                            <?php } else { ?>
+                                                <img src="dist/img/image_users/no_image.jpg" class="img-circle"
+                                                     alt="User Image">
+
+                                            <?php }
+                                            ?>
+                                           <!-- <img src="dist/img/image_users/<?/*= $row['auth'] */?>.jpg" class="img-circle" alt="User Image">-->
                                         </div>
                                         <div class="pull-left info">
-                                            <p><?php echo $user; ?></p>
+                                            <p class="bg-black"><?= $row['auth'] ?></p>
                                             <!-- Status -->
                                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                                         </div>

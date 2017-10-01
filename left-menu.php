@@ -39,7 +39,7 @@
                 </a>
             </li>
             <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-            <li <?= ($page == 'members') ? "class='active'" : "";  ?>  class="treeview">
+            <li <?= ($page == 'members' || $page == 'friends') ? "class='active'" : "";  ?>  class="treeview">
                 <a href="#"><i class="fa fa-user-o"></i> <span>Друзья</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
@@ -47,7 +47,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li <?= ($page == 'members') ? "class='active'" : "";  ?> ><a href="members.php">Все друзья</a></li>
-                    <li><a href="friends.php">Мои друзья</a></li>
+                    <li <?= ($page == 'friends') ? "class='active'" : "";  ?> ><a href="friends.php">Мои друзья</a></li>
                 </ul>
             </li>
         </ul>

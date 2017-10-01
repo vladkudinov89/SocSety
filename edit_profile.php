@@ -1,4 +1,5 @@
-<?php // Example 26-8: profile.php
+
+<?php
 require_once 'header.php';
 
 if (!$loggedin) die();
@@ -24,7 +25,7 @@ if (!$loggedin) die();
         <section class="content container-fluid">
 
             <!--------------------------
-              | Your Page Content Here |
+              | Your Content |
       -------------------------->
             <?php
 
@@ -41,11 +42,11 @@ if (!$loggedin) die();
                 </div>
                 <div class="form-group">
                     <div class="text-bold">Выбрать изображение:</div>
-                    <input class="btn btn-primary" type='file' name='image' size='14'>
+                    <input class="btn btn-primary" type='file' id="image-profile" name='image' size='14'>
                 </div>
                 <div class="form-group">
                     <div class="text-bold">Ваше Имя:</div>
-                    <input type="text" required name="user_name" id="" value="<?php
+                    <input type="text" required name="user_name" id="user_name" value="<?php
                     if (isset($row['user_name'])) {
                         echo $row['user_name'];
                     } else {
@@ -55,7 +56,7 @@ if (!$loggedin) die();
                 </div>
                 <div class="form-group">
                     <div class="text-bold">Ваша Фамилия:</div>
-                    <input type="text" required name="user_secondName" id="" value="<?php
+                    <input type="text" required name="user_secondName" id="user_secondName" value="<?php
                     if (isset($row['user_secondName'])) {
                         echo $row['user_secondName'];
 
@@ -66,13 +67,13 @@ if (!$loggedin) die();
                 </div>
                 <div class="form-group">
                     <div class="text-bold">О себе:</div>
-                    <textarea class="about-me" name='text' cols='50' rows='3'><?php if (isset($row['text'])) echo $row['text']; else { echo "";} ?>
+                    <textarea class="about-me" name='text' id="text" cols='50' rows='3'><?php if (isset($row['text'])) echo $row['text']; else { echo "";} ?>
                     </textarea>
                 </div>
 
 
                 <div class="form-group">
-                    <input class="btn btn-success" type='submit' value='Сохранить'>
+                    <input class="btn btn-success" id="edit-profile" type='submit' value='Сохранить'>
                 </div>
             </form>
 
